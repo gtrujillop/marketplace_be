@@ -58,3 +58,7 @@ The body of the POST request must be the JSON file shared with this assessment
 If products were loaded, You'll get a 200 OK respone AND you can review'em via GET request to
 
 `http://localhost:3000/v1/products`
+
+## Author:
+
+* **Gaston Trujillo Pulgar**
