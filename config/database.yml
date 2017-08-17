@@ -1,0 +1,12 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  username: wtm_local
+
+development:
+  <<: *default
+  database: marketplace_development
+
+test:
+  <<: *default
+  database: marketplace_test
