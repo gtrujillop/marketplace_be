@@ -1,24 +1,60 @@
-# README
+# Marketplace API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a small RoR 5.1.3 + Ruby 2.3.1 proyect. It serves as backend tier for a small Marketplace Web application
 
-Things you may want to cover:
+### LIVE VERSION:
+http://marketplace-api-getp.herokuapp.com/v1/products
 
-* Ruby version
+### API DOCS
+http://marketplace-api-getp.herokuapp.com/api/docs
 
-* System dependencies
+## Getting Started:
 
-* Configuration
+If you want to try this repo locally, Please clone this repo and consider the RoR & Ruby versions mentioned above. Also, install postgresql 9.x version and create databases for testing and development envs the way are defined on database.yml files
 
-* Database creation
+After having all basic settings, update your gemfile by running `bundle install --whitout production`. After that, run migrations and start your puma server
 
-* Database initialization
+Also, run your redis server and your resque jobs
 
-* How to run the test suite
+```
+redis-server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+then
 
-* Deployment instructions
+```
+QUEUE='*' VERBOSE=1 rake environment resque:work
+```
+This will allow You to send emails locally. However, we sugggest to try this via online version
 
-* ...
+## Usage
+
+After having all initial config done and project running, please open up a rails console `rails c` and create an initial admin user
+
+```
+User.create(first_name: 'Admin', last_name: 'User', email: 'adminuser@myemail.com', pasword: '12345678', password_confirmation: '1234567', is_admin: true)
+```
+If there were no issues while creating the Admin user, go ahead and add products by running a POST request to
+
+`http://localhost:3000/v1/products`
+and pass your auth keys as headers on the request:
+
+```
+X-API-EMAIL:gaston.trujillo.java@gmail.com
+X-API-TOKEN:prqKSa8-RxGtaqQ5LLoy3RrqTjexy6rSeA
+```
+Both values can be reviewed via console
+
+```
+rails c
+> User.last.authentication_token
+> 'prqKSa8-RxGtaqQ5LLoy3RrqTjexy6rSeA'
+> User.last.email
+> gaston.trujillo.java@gmail.com
+```
+
+The body of the POST request must be the JSON file shared with this assessment
+
+If products were loaded, You'll get a 200 OK respone AND you can review'em via GET request to
+
+`http://localhost:3000/v1/products`
