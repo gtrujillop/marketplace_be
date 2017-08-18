@@ -55,6 +55,11 @@ rails c
 
 The body of the POST request must be the JSON file shared with this assessment
 
+OR You can run a CURL request by running
+something like
+
+```curl -vX POST http://localhost:3000/v1/products -d @products.json --header "Content-Type: application/json" --header "X-API-TOKEN: prqKSa8-RxGtaqQ5LLoy3RrqTjexy6rSeA" --header "X-API-EMAIL: gaston.trujillo.java@gmail.com"```
+
 If products were loaded, You'll get a 200 OK respone AND you can review'em via GET request to
 
 `http://localhost:3000/v1/products`
